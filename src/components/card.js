@@ -5,16 +5,16 @@ import { Box, Card, CardActions, CardContent, Button, Typography } from '@materi
 
 export default function BasicCard() {
   return (
-    <Card sx={{ minWidth: 275, mb: 2 }}>
+    <Card sx={{ minWidth: 275, margin: 2 }}>
       <CardContent>
         {/* <MoreHorizIcon sx={{ fontSize: 20 }}/> */}
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+        <Typography sx={{ fontSize: 14 }} gutterBottom>
           Task Title
         </Typography>
         <Typography variant="h5" component="div">
           benevolent
         </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        <Typography sx={{ mb: 1.5 }} >
           adjective
         </Typography>
         <Typography variant="body2">
