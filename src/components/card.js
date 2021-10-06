@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+// import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 
 export default function BasicCard() {
   return (
     <Card sx={{ minWidth: 275, mb: 2 }}>
       <CardContent>
-        <MoreHorizIcon sx={{ fontSize: 20 }}/>
+        {/* <MoreHorizIcon sx={{ fontSize: 20 }}/> */}
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Task Title
         </Typography>
