@@ -20,9 +20,9 @@ export default function AlertDialog(props) {
   const [priority, setPriority] = useState();
 
   const handleClose = () => {
-    console.log(title, description, priority)
+    console.log('HandleClose in modal', title, description, priority)
     setOpen(false);
-    props.handleSubmit();
+    props.handleSubmit(title, description, priority);
   };
 
   return (

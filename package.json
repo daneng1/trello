@@ -18,10 +18,13 @@
     "url": "https://github.com/daneng1/trello/issues"
   },
   "dependencies": {
+    "@emotion/react": "^11.4.1",
+    "@emotion/styled": "^11.3.0",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@mui/icons-material": "^5.0.1",
+    "@mui/material": "^5.0.2",
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -38,7 +41,8 @@
     "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "superagent": "^6.1.0",
-    "thunk": "^0.0.1"
+    "thunk": "^0.0.1",
+    "uuid": "^8.3.2"
   },
   "browserslist": {
     "production": [

@@ -3,10 +3,13 @@ let initialState = {
   columnCount: 0,
 };
 
-export default function cartReducer(state = initialState, action) {
+export default function columnReducer(state = initialState, action) {
   let { type, payload } = action;
 
   switch (type) {
+    case "GET_COLUMNS":
+      return items;
+
     case "ADD_COLUMN":
       return {
         items: [...state.items, payload],
@@ -20,29 +23,35 @@ export default function cartReducer(state = initialState, action) {
     case "MODIFY_COLUMN":
       let updatedItems = state.items.map((item) => {
         item === payload ? item = payload: null});
-      return { ...state, items: newItems, payload };
+      return { ...state, items: updatedItems };
 
     default:
       return state;
   }
 }
 
-export const addItem = (name) => {
+export const addColumn = (item) => {
   return {
     type: "ADD_COLUMN",
-    payload: name,
+    payload: item,
   };
 };
 
-export const deleteItem = (item) => {
+export const deleteColumn = (item) => {
   return {
     type: "REMOVE_COLUMN",
     payload: item,
   };
 };
 
-export const resetCard = () => {
+export const updateColumn = () => {
   return {
     type: "MODIFY_COLUMN",
   };
 };  
+
+export const getColumns = () => {
+  return {
+    type: "GET_COLUMNS",
+  };
+};
