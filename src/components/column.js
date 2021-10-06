@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   container: {
-    width: "20vw",
+    width: "250px",
     height: "80vh",
     backgroundColor: "red",
     flexDirection: "column"
@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Column() {
   const classes = useStyles()
+
   return (
     <Container className={classes.container}>
       <Typography variant="h3" gutterBottom component="div">Column Title</Typography>
@@ -29,3 +30,14 @@ export default function Column() {
     </Container>
   )
 }
+
+// const mapDispatchToProps = dispatch => ({
+//   deleteItem: (item) => dispatch(deleteItem(item)),
+//   modifyCard: () => dispatch(modifyCard())
+// });
+
+// const mapStateToProps = state => ({
+//   cardReducer: state.cardReducer
+// })
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Column);
