@@ -24,25 +24,24 @@ function Board(props) {
   const [modalIsActive, setModalIsActive] = useState(false);
   const classes = useStyles();
 
-  const handleSubmit = (title, description, priority) => {
+  const handleSubmit = (title, description) => {
     setModalIsActive(false);
     let newColumn = {
-      id: uuidv4(), title, description, priority
+      _id: uuidv4(), title, description
     }
-    console.log('new column', newColumn);
     props.addColumn(newColumn);
   }
 
-  const fetchData = (e) => {
-    e && e.preventDefault();
-    props.get();
-  }
+  // const fetchData = (e) => {
+  //   e && e.preventDefault();
+  //   props.get();
+  // }
   
-  function Data() {
-    useEffect(() => {
-      fetchData();
-    }, []);
-  }
+  // function Data() {
+  //   useEffect(() => {
+  //     fetchData();
+  //   }, []);
+  // }
 
   return (
     <Container className={classes.container}>
@@ -53,15 +52,16 @@ function Board(props) {
         title='Column Name'
         description='Description'
         buttonTitle='Submit'
-        options={['low', 'normal', 'high']}
         />
       : null}
 
       {props.data ? 
         props.data.map((item) => {
+          // console.log('inside map', item._id);
           return (
           <Column 
-            key={item.id}
+            key={item._id}
+            id={item._id}
             title={item.title}
             description={item.description}
           />
@@ -76,7 +76,7 @@ const mapDispatchToProps = dispatch => ({
   addColumn: (item) => dispatch(addColumn(item)),
   deleteColumn: (item) => dispatch(deleteColumn(item)),
   updateColumn: (item) => dispatch(updateColumn(item)),
-  get: () => dispatch(getColumns()),
+  // get: () => dispatch(getColumns()),
 });
 
 const mapStateToProps = state => ({

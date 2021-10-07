@@ -1,6 +1,5 @@
 let initialState = {
   items: [],
-  columnCount: 0,
 };
 
 export default function columnReducer(state = initialState, action) {
@@ -13,17 +12,20 @@ export default function columnReducer(state = initialState, action) {
     case "ADD_COLUMN":
       return {
         items: [...state.items, payload],
-        cardCount: state.columnCount + 1,
       };
 
     case "REMOVE_COLUMN":
-      let newItems = state.items.filter((item) => item !== payload);
+      let newItems = state.items.filter((item) => item._id !== payload);
       return { ...state, items: newItems, columnCount: state.columnCount - 1 };
 
     case "MODIFY_COLUMN":
-      let updatedItems = state.items.map((item) => {
-        item === payload ? item = payload: null});
-      return { ...state, items: updatedItems };
+      let updatedItems = state.items.map((item) => item._id === payload._id ? item = payload : null);
+        // if(item._id === payload._id) {
+        //   item.title = payload.title;
+        //   item.description = payload.description;
+        // }
+      console.log(updatedItems);
+      return {...state, items: updatedItems };
 
     default:
       return state;
@@ -44,9 +46,10 @@ export const deleteColumn = (item) => {
   };
 };
 
-export const updateColumn = () => {
+export const updateColumn = (item) => {
   return {
     type: "MODIFY_COLUMN",
+    payload: item,
   };
 };  
 
