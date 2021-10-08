@@ -1,6 +1,5 @@
 let initialState = {
   items: [],
-  cardCount: 0,
 };
 
 export default function cartReducer(state = initialState, action) {
@@ -10,7 +9,6 @@ export default function cartReducer(state = initialState, action) {
     case "ADD_CARD":
       return {
         items: [...state.items, payload],
-        cardCount: state.cardCount + 1,
       };
 
     case "REMOVE_CART":
@@ -27,22 +25,23 @@ export default function cartReducer(state = initialState, action) {
   }
 }
 
-export const addItem = (name) => {
+export const addCard = (name) => {
   return {
     type: "ADD_CARD",
     payload: name,
   };
 };
 
-export const deleteItem = (item) => {
+export const deleteCard = (item) => {
   return {
     type: "REMOVE_CARD",
     payload: item,
   };
 };
 
-export const modifyCard = () => {
+export const modifyCard = (item) => {
   return {
     type: "MODIFY_CARD",
+    payload: item
   };
 };  
