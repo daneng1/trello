@@ -15,7 +15,7 @@ let initialState = {
   ],
 };
 
-export default function cartReducer(state = initialState, action) {
+export default function cardReducer(state = initialState, action) {
   let { type, payload } = action;
 
   switch (type) {
@@ -24,13 +24,14 @@ export default function cartReducer(state = initialState, action) {
         items: [...state.items, payload],
       };
 
-    case "REMOVE_CART":
-      let newItems = state.items.filter((item) => item !== payload);
-      return { ...state, items: newItems, cardCount: state.cardCount - 1 };
+    case "REMOVE_CARD":
+      let newItems = state.items.filter((item) => item._id !== payload);
+      return { ...state, items: newItems };
 
     case "MODIFY_CARD":
       let updatedItems = state.items.map((item) => {
-        item === payload ? item = payload : null});
+        item._id === payload._id ? item = payload : null});
+        console.log(updatedItems);
       return { ...state, items: updatedItems };
 
     default:
@@ -45,14 +46,14 @@ export const addCard = (name) => {
   };
 };
 
-export const deleteCard = (item) => {
+export const deleteCard = (id) => {
   return {
     type: "REMOVE_CARD",
-    payload: item,
+    payload: id,
   };
 };
 
-export const modifyCard = (item) => {
+export const updateCard = (item) => {
   return {
     type: "MODIFY_CARD",
     payload: item

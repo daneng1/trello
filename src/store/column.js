@@ -24,7 +24,7 @@ export default function columnReducer(state = initialState, action) {
 
     case "REMOVE_COLUMN":
       let newItems = state.items.filter((item) => item._id !== payload);
-      return { ...state, items: newItems, columnCount: state.columnCount - 1 };
+      return { ...state, items: newItems };
 
     case "MODIFY_COLUMN":
       let updatedItems = state.items.map((item) => item._id === payload._id ? item = payload : null);

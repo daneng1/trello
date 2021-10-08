@@ -1,11 +1,17 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { deleteCard, modifyCard } from '../store/card.js';
+import { deleteCard, updateCard } from '../store/card.js';
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 
 function BasicCard(props) {
+
+  const removeCard = (id) => {
+    console.log(id);
+    props.deleteCard(id)
+  }
+
   return (
-    <Card sx={{ minWidth: 275, margin: 2 }}>
+    <Card draggable='true' sx={{ minWidth: 275, margin: 2 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} gutterBottom>
           {props.title}
@@ -18,7 +24,7 @@ function BasicCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Delete</Button>
+        <Button onClick={() => {removeCard(props.id)}}size="small">Delete</Button>
         <Button size="small">Move</Button>
       </CardActions>
     </Card>
@@ -26,7 +32,7 @@ function BasicCard(props) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  updateCard: (item) => dispatch(modifyCard(item)),
+  updateCard: (item) => dispatch(updateCard(item)),
   deleteCard: (item) => dispatch(deleteCard(item)),
 });
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
 import { updateColumn, deleteColumn } from '../store/column.js';
-import { addCard, deleteCard, modifyCard } from '../store/card.js';
+import { addCard, deleteCard, updateCard } from '../store/card.js';
 import Card from './card.js';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Container, Button } from "@material-ui/core";
@@ -32,10 +32,48 @@ function Column(props) {
   const [newCardModalIsOpen, setNewCardModalIsOpen] = useState(false);
   const classes = useStyles()
 
-  const removeColumn = (id) => {
-    props.deleteColumn(id);
+  const drop = e => {
+    e.preventDefault();
+    const card_id = e.dataTransfer.getData('_id');
+    const card = document.getElementById(card_id);
+    card.style.display = 'block';
+
+    e.target.appendChild(card);
   }
-  // const removeCard
+
+  const dragOver = e => {
+    e.preventDefault();
+    
+  }
+
+  const removeColumn = (id) => {
+    // search card reducer to see if any cards have column_id that matches id
+    let cards = props.tasks.filter((task) => task.column_id === id);
+    console.log('starting point', cards);
+    // if yes, change column_id to next column in column reducer
+    let columnIds = props.data.map((column) => column._id);
+    console.log('columnIndex', columnIds);
+    let index = columnIds.indexOf(cards[0].column_id);
+    console.log('index', index);
+    if  (cards && index === columnIds.length -1) {
+      cards.map((item) => {
+        item.column_id = columnIds[index - 1];
+        props.updateCard(item);
+      });
+      console.log('end of columns', cards);
+    } else if (cards && index < columnIds.length -1) {
+      cards.map((item) => {
+        item.column_id = columnIds[index + 1];
+        props.updateCard(item);
+      });
+      console.log('middle of columns', cards);
+    }
+    // if no, then just continue
+    // props.deleteColumn(id);
+  }
+  // const deleteCard = (id) => {
+    
+  // }
 
   // const updateColumn = (title, description) => {
   //   let newColumn = {
@@ -82,9 +120,10 @@ function Column(props) {
 
       {props.tasks ? 
         props.tasks.filter((item) => item.column_id === props.id).map((filteredTask) => {
-            console.log('filteredTask', props.id, filteredTask);
+            // console.log('filteredTask', props.id, filteredTask);
             return (
           <Card
+            draggable='true'
             key={filteredTask._id}
             id={filteredTask._id}
             title={filteredTask.title}
@@ -99,15 +138,15 @@ function Column(props) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  // deleteColumn: (item) => dispatch(deleteColumn(item)),
+  deleteColumn: (item) => dispatch(deleteColumn(item)),
   // updateColumn: (item) => dispatch(updateColumn(item)),
   addCard: (item) => dispatch(addCard(item)),
-  // updateCard: (item) => dispatch(modifyCard(item)),
+  updateCard: (item) => dispatch(updateCard(item)),
   // deleteCard: (item) => dispatch(deleteCard(item)),
 });
 
 const mapStateToProps = state => ({
-  // data: state.columnReducer.items,
+  data: state.columnReducer.items,
   tasks: state.cardReducer.items,
 })
 
