@@ -1,14 +1,22 @@
 let initialState = {
-  items: [],
+  items: [
+    {
+      title: "Column 1",
+      description: "This is a test column",
+      _id: "snm,dbflkwufha;hLKGkjhFGV"
+    },
+    {
+      title: "Column 2",
+      description: "This is a test column",
+      _id: "FDSDGJHSFKLGb&T^*^&*"
+    }
+  ],
 };
 
 export default function columnReducer(state = initialState, action) {
   let { type, payload } = action;
 
   switch (type) {
-    case "GET_COLUMNS":
-      return items;
-
     case "ADD_COLUMN":
       return {
         items: [...state.items, payload],
@@ -53,8 +61,3 @@ export const updateColumn = (item) => {
   };
 };  
 
-export const getColumns = () => {
-  return {
-    type: "GET_COLUMNS",
-  };
-};

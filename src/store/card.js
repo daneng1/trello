@@ -1,5 +1,18 @@
 let initialState = {
-  items: [],
+  items: [
+    {
+      title: "CARD 1",
+      description: "This is a test card",
+      column_id: "snm,dbflkwufha;hLKGkjhFGV",
+      _id: "nabdslakgailDGUwaukev"
+    },
+    {
+      title: "CARD 2",
+      description: "This is a test column",
+      column_id: "FDSDGJHSFKLGb&T^*^&*",
+      _id: "samnhedvkuDFKVCWA"
+    }
+  ],
 };
 
 export default function cartReducer(state = initialState, action) {

@@ -1,7 +1,9 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { deleteCard, modifyCard } from '../store/card.js';
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 
-export default function BasicCard(props) {
+function BasicCard(props) {
   return (
     <Card sx={{ minWidth: 275, margin: 2 }}>
       <CardContent>
@@ -22,3 +24,14 @@ export default function BasicCard(props) {
     </Card>
   );
 }
+
+const mapDispatchToProps = dispatch => ({
+  updateCard: (item) => dispatch(modifyCard(item)),
+  deleteCard: (item) => dispatch(deleteCard(item)),
+});
+
+const mapStateToProps = state => ({
+  tasks: state.cardReducer.items,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BasicCard);

@@ -7,8 +7,6 @@ import Card from './card.js';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Container, Button } from "@material-ui/core";
 import Modal from './modal';
-import BasicMenu from './menu.js';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,12 +29,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Column(props) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [newCardModalIsOpen, setNewCardModalIsOpen] = useState(false);
   const classes = useStyles()
 
   const removeColumn = (id) => {
     props.deleteColumn(id);
   }
+  // const removeCard
 
   // const updateColumn = (title, description) => {
   //   let newColumn = {
@@ -46,7 +45,7 @@ function Column(props) {
   // }
 
   const handleSubmit = (title, description, priority) => {
-    setModalIsOpen(false);
+    setNewCardModalIsOpen(false);
     let newCard = {
       _id: uuidv4(), title, description, priority, column_id: props.id
     }
@@ -55,28 +54,22 @@ function Column(props) {
 
   return (
     <Container className={classes.container}>
-      {modalIsOpen ? 
+      {/* {newCardModalIsOpen ? 
         <Modal 
-          innerText='Update Column' 
+          innerText='Update Card' 
           handleSubmit={addCard}
           title='Column Name'
           description='Description'
           buttonTitle='Submit'
         />
-      : null}
+      : null} */}
       <Button onClick={() => removeColumn(props.id)}>X</Button>
       {/* <Button onClick={() => setModalIsOpen(true)}>Update</Button> */}
-      <Button onClick={() => setModalIsOpen(true)}>Add Task</Button>
-      {/* <BasicMenu 
-      className={classes.menu}
-      delete={deleteColumn(props.id)}
-      update={updateColumn}
-      /> */}
-      <Typography variant="h3" gutterBottom component="div">{props.title}</Typography>
+      <Button onClick={() => setNewCardModalIsOpen(true)}>Add Task</Button>
+      <Typography variant="h4" gutterBottom component="div">{props.title}</Typography>
       <Typography  gutterBottom component="p">{props.description}</Typography>
-      <Typography  gutterBottom component="p">{props.id}</Typography>
 
-      {modalIsOpen ? 
+      {newCardModalIsOpen ? 
         <Modal 
         innerText='New Task' 
         handleSubmit={handleSubmit}
@@ -87,9 +80,10 @@ function Column(props) {
         />
       : null}
 
-      {props.data ? 
-        props.tasks.filter((item) => {
-          item.column_id === props.id}).map((filteredTask) => {
+      {props.tasks ? 
+        props.tasks.filter((item) => item.column_id === props.id).map((filteredTask) => {
+            console.log('filteredTask', props.id, filteredTask);
+            return (
           <Card
             key={filteredTask._id}
             id={filteredTask._id}
@@ -97,7 +91,7 @@ function Column(props) {
             description={filteredTask.description}
             priority={filteredTask.priority}
           />
-        })
+        )})
       :null}
 
     </Container>
@@ -105,15 +99,15 @@ function Column(props) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  deleteColumn: (item) => dispatch(deleteColumn(item)),
-  updateColumn: (item) => dispatch(updateColumn(item)),
+  // deleteColumn: (item) => dispatch(deleteColumn(item)),
+  // updateColumn: (item) => dispatch(updateColumn(item)),
   addCard: (item) => dispatch(addCard(item)),
-  updateCard: (item) => dispatch(modifyCard(item)),
-  deleteCard: (item) => dispatch(deleteCard(item)),
+  // updateCard: (item) => dispatch(modifyCard(item)),
+  // deleteCard: (item) => dispatch(deleteCard(item)),
 });
 
 const mapStateToProps = state => ({
-  data: state.columnReducer.items,
+  // data: state.columnReducer.items,
   tasks: state.cardReducer.items,
 })
 

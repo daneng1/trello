@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Board(props) {
-  const [addColumn, setAddColumn] = useState();
   const [modalIsActive, setModalIsActive] = useState(false);
   const classes = useStyles();
 
@@ -57,7 +56,6 @@ function Board(props) {
 
       {props.data ? 
         props.data.map((item) => {
-          // console.log('inside map', item._id);
           return (
           <Column 
             key={item._id}
@@ -67,16 +65,15 @@ function Board(props) {
           />
         )})
       :null}
-      <Button onClick={() => setModalIsActive(true)}>Add Column</Button>
+      <Button size="small"onClick={() => setModalIsActive(true)}>Add Column</Button>
     </Container>
   );
 }
 
 const mapDispatchToProps = dispatch => ({
   addColumn: (item) => dispatch(addColumn(item)),
-  deleteColumn: (item) => dispatch(deleteColumn(item)),
-  updateColumn: (item) => dispatch(updateColumn(item)),
-  // get: () => dispatch(getColumns()),
+  // deleteColumn: (item) => dispatch(deleteColumn(item)),
+  // updateColumn: (item) => dispatch(updateColumn(item)),
 });
 
 const mapStateToProps = state => ({
