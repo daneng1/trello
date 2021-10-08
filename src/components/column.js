@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
+import { v4 as uuidv4 } from 'uuid';
 import { updateColumn, deleteColumn } from '../store/column.js';
+import { addCard, deleteCard, modifyCard } from '../store/card.js';
 import Card from './card.js';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Container, Button } from "@material-ui/core";
@@ -36,19 +38,19 @@ function Column(props) {
     props.deleteColumn(id);
   }
 
-  const updateColumn = (title, description) => {
-    let newColumn = {
-      _id: props.id, title, description
-    }
-    props.updateColumn(newColumn);
-  }
+  // const updateColumn = (title, description) => {
+  //   let newColumn = {
+  //     _id: props.id, title, description
+  //   }
+  //   props.updateColumn(newColumn);
+  // }
 
-  const handleSubmit = (title, description) => {
-    setModalIsActive(false);
-    let newColumn = {
-      _id: uuidv4(), title, description
+  const handleSubmit = (title, description, priority) => {
+    setModalIsOpen(false);
+    let newCard = {
+      _id: uuidv4(), title, description, priority, column_id: props.id
     }
-    props.addColumn(newColumn);
+    props.addCard(newCard);
   }
 
   return (
@@ -56,7 +58,7 @@ function Column(props) {
       {modalIsOpen ? 
         <Modal 
           innerText='Update Column' 
-          handleSubmit={updateColumn}
+          handleSubmit={addCard}
           title='Column Name'
           description='Description'
           buttonTitle='Submit'
@@ -74,27 +76,28 @@ function Column(props) {
       <Typography  gutterBottom component="p">{props.description}</Typography>
       <Typography  gutterBottom component="p">{props.id}</Typography>
 
-      {modalIsActive ? 
+      {modalIsOpen ? 
         <Modal 
-        innerText='New Column' 
+        innerText='New Task' 
         handleSubmit={handleSubmit}
-        title='Column Name'
+        title='Task Name'
         description='Description'
+        priority={['High', 'Low', 'Medium', 'High']}
         buttonTitle='Submit'
         />
       : null}
 
       {props.data ? 
-        props.data.map((item) => {
-          // console.log('inside map', item._id);
-          return (
+        props.tasks.filter((item) => {
+          item.column_id === props.id}).map((filteredTask) => {
           <Card
-            key={item._id}
-            id={item._id}
-            title={item.title}
-            description={item.description}
+            key={filteredTask._id}
+            id={filteredTask._id}
+            title={filteredTask.title}
+            description={filteredTask.description}
+            priority={filteredTask.priority}
           />
-        )})
+        })
       :null}
 
     </Container>
@@ -104,6 +107,9 @@ function Column(props) {
 const mapDispatchToProps = dispatch => ({
   deleteColumn: (item) => dispatch(deleteColumn(item)),
   updateColumn: (item) => dispatch(updateColumn(item)),
+  addCard: (item) => dispatch(addCard(item)),
+  updateCard: (item) => dispatch(modifyCard(item)),
+  deleteCard: (item) => dispatch(deleteCard(item)),
 });
 
 const mapStateToProps = state => ({

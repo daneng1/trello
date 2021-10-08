@@ -1,33 +1,24 @@
-import * as React from 'react';
+import React from 'react';
 import { Box, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-// import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
-
-export default function BasicCard() {
+export default function BasicCard(props) {
   return (
     <Card sx={{ minWidth: 275, margin: 2 }}>
       <CardContent>
-        {/* <MoreHorizIcon sx={{ fontSize: 20 }}/> */}
         <Typography sx={{ fontSize: 14 }} gutterBottom>
-          Task Title
+          {props.title}
         </Typography>
-        <Typography variant="h5" component="div">
-          benevolent
+        <Typography component="p">
+          {props.description}
         </Typography>
-        <Typography sx={{ mb: 1.5 }} >
-          adjective
-        </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
+        <Typography component="p">
+          Priority: {props.priority}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Delete</Button>
+        <Button size="small">Move</Button>
       </CardActions>
     </Card>
   );
 }
-
-// TODO: icons not appearing, look into formatting
