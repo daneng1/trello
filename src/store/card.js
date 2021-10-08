@@ -29,8 +29,8 @@ export default function cardReducer(state = initialState, action) {
       return { ...state, items: newItems };
 
     case "MODIFY_CARD":
-      let updatedItems = state.items.map((item) => {
-        item._id === payload._id ? item = payload : null});
+      console.log('update payload', payload);
+      let updatedItems = state.items.map(item => item._id === payload._id ? item = payload: item );
         console.log(updatedItems);
       return { ...state, items: updatedItems };
 

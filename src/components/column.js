@@ -43,33 +43,30 @@ function Column(props) {
 
   const dragOver = e => {
     e.preventDefault();
-    
+
   }
 
   const removeColumn = (id) => {
-    // search card reducer to see if any cards have column_id that matches id
     let cards = props.tasks.filter((task) => task.column_id === id);
-    console.log('starting point', cards);
-    // if yes, change column_id to next column in column reducer
     let columnIds = props.data.map((column) => column._id);
-    console.log('columnIndex', columnIds);
-    let index = columnIds.indexOf(cards[0].column_id);
-    console.log('index', index);
-    if  (cards && index === columnIds.length -1) {
+    let index = cards ? columnIds.indexOf(cards[0].column_id) : null;
+
+    if (cards && columnIds.length === 1) {
+      let response = alert("You sure about that? All of your tasks will be lost");
+      console.log(response);
+    } else if (cards && index === columnIds.length -1) {
       cards.map((item) => {
         item.column_id = columnIds[index - 1];
         props.updateCard(item);
       });
-      console.log('end of columns', cards);
+
     } else if (cards && index < columnIds.length -1) {
       cards.map((item) => {
         item.column_id = columnIds[index + 1];
         props.updateCard(item);
       });
-      console.log('middle of columns', cards);
     }
-    // if no, then just continue
-    // props.deleteColumn(id);
+    props.deleteColumn(id);
   }
   // const deleteCard = (id) => {
     
