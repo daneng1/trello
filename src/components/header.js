@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Container, Button } from "@material-ui/core";
+import { Typography, Container, Button } from "@material-ui/core";
+import { fontWeight } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(2),
-      width: "75ch",
-    },
-  },
+
   container: {
     width: "90vw",
     height: "10vh",
-    backgroundColor: "green",
+    backgroundColor: "none",
+    margin: "0 auto",
   },
-
+  headerText: {
+    display: "flex",
+    justifyContent: "center",
+    paddingTop: "2vh",
+    fontWeight: "bolder",
+    textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+    fontSize: "4vw",
+    color: "#002766",
+  },
 }));
 
 export default function Board() {
@@ -22,7 +27,9 @@ export default function Board() {
 
   return (
     <Container className={classes.container}>
-      <TextField>Hello</TextField>
+      <Typography variant="h4" className={classes.headerText}>
+        Dan's Trello Clone
+      </Typography>
     </Container>
-  )
+  );
 }

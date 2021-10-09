@@ -1,14 +1,14 @@
 let initialState = {
   items: [
     {
-      title: "CARD 1",
-      description: "This is a test card",
+      title: "Column 1 CARD 1",
+      description: "This is the description for this card.",
       column_id: "snm,dbflkwufha;hLKGkjhFGV",
       _id: "nabdslakgailDGUwaukev"
     },
     {
-      title: "CARD 2",
-      description: "This is a test column",
+      title: "Column 2 CARD 1",
+      description: "This is the description for this card.",
       column_id: "FDSDGJHSFKLGb&T^*^&*",
       _id: "samnhedvkuDFKVCWA"
     }
@@ -28,10 +28,8 @@ export default function cardReducer(state = initialState, action) {
       let newItems = state.items.filter((item) => item._id !== payload);
       return { ...state, items: newItems };
 
-    case "MODIFY_CARD":
-      console.log('update payload', payload);
-      let updatedItems = state.items.map(item => item._id === payload._id ? item = payload: item );
-        console.log(updatedItems);
+    case "MOVE_CARD":
+      let updatedItems = state.items.map(item => item._id === payload[0] ? {...item, column_id:payload[1] } : item );
       return { ...state, items: updatedItems };
 
     default:
@@ -53,9 +51,9 @@ export const deleteCard = (id) => {
   };
 };
 
-export const updateCard = (item) => {
+export const moveCard = (item) => {
   return {
-    type: "MODIFY_CARD",
+    type: "MOVE_CARD",
     payload: item
   };
 };  

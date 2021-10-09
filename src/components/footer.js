@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, Container, Button } from "@material-ui/core";
+import { Typography, Container, Button, rgbToHex } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,13 +12,13 @@ const useStyles = makeStyles((theme) => ({
   container: {
     width: "90vw",
     height: "10vh",
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    backgroundColor: "none",
   },
   text: {
+    padding: 20,
     size: "30px",
-    color: "white"
-  }
-
+    color: "#002766",
+  },
 }));
 
 export default function Board() {
@@ -26,7 +26,9 @@ export default function Board() {
 
   return (
     <Container className={classes.container}>
-      <TextField className={classes.text} placeholder="Enter Some Text"></TextField>
+      <Typography className={classes.text} placeholder="Enter Some Text">
+        © Dan Engel, 2021
+      </Typography>
     </Container>
-  )
+  );
 }

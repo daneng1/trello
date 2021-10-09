@@ -11,7 +11,6 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import { LocalConvenienceStoreOutlined } from "@material-ui/icons";
 
 export default function AlertDialog(props) {
   const [open, setOpen] = useState(true);
@@ -48,8 +47,9 @@ export default function AlertDialog(props) {
           />
           <TextField
             required
-            placeholder={props.description} 
-            onChange={(e) => setDescription(e.target.value)}/>
+            placeholder={props.description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
           {props.options ? (
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="demo-simple-select-standard-label">
@@ -59,7 +59,7 @@ export default function AlertDialog(props) {
                 required
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
-                value=''
+                value=""
                 onChange={(e) => setPriority(e.target.value)}
                 label="Priority"
               >

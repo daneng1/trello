@@ -1,13 +1,13 @@
 let initialState = {
   items: [
     {
-      title: "Column 1",
-      description: "This is a test column",
+      title: "Test Column 1",
+      description: "This is a description of the column",
       _id: "snm,dbflkwufha;hLKGkjhFGV"
     },
     {
-      title: "Column 2",
-      description: "This is a test column",
+      title: "Test Column 2",
+      description: "This is another description of the column",
       _id: "FDSDGJHSFKLGb&T^*^&*"
     }
   ],
@@ -28,11 +28,6 @@ export default function columnReducer(state = initialState, action) {
 
     case "MODIFY_COLUMN":
       let updatedItems = state.items.map((item) => item._id === payload._id ? item = payload : null);
-        // if(item._id === payload._id) {
-        //   item.title = payload.title;
-        //   item.description = payload.description;
-        // }
-      console.log(updatedItems);
       return {...state, items: updatedItems };
 
     default:
