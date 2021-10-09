@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
-import { updateColumn, deleteColumn } from '../store/column.js';
-import { addCard, deleteCard, updateCard } from '../store/card.js';
+import { deleteColumn } from '../store/column.js';
+import { addCard } from '../store/card.js';
 import Card from './card.js';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Container, Button } from "@material-ui/core";
@@ -25,59 +25,51 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     right: "15px"
   }
-
 }));
 
 function Column(props) {
   const [newCardModalIsOpen, setNewCardModalIsOpen] = useState(false);
   const classes = useStyles()
 
-  const drop = e => {
-    e.preventDefault();
-    const card_id = e.dataTransfer.getData('_id');
-    const card = document.getElementById(card_id);
-    card.style.display = 'block';
+  // const drop = e => {
+  //   e.preventDefault();
+  //   const card_id = e.dataTransfer.getData('_id');
+  //   const card = document.getElementById(card_id);
+  //   card.style.display = 'block';
+  //   e.target.appendChild(card);
+  // }
 
-    e.target.appendChild(card);
-  }
-
-  const dragOver = e => {
-    e.preventDefault();
-
-  }
+  // const dragOver = e => {
+  //   e.preventDefault();
+  // }
 
   const removeColumn = (id) => {
     let cards = props.tasks.filter((task) => task.column_id === id);
     let columnIds = props.data.map((column) => column._id);
-    let index = cards ? columnIds.indexOf(cards[0].column_id) : null;
+    console.log(cards)
 
-    if (cards && columnIds.length === 1) {
-      let response = alert("You sure about that? All of your tasks will be lost");
-      console.log(response);
-    } else if (cards && index === columnIds.length -1) {
-      cards.map((item) => {
-        item.column_id = columnIds[index - 1];
-        props.updateCard(item);
-      });
-
-    } else if (cards && index < columnIds.length -1) {
-      cards.map((item) => {
-        item.column_id = columnIds[index + 1];
-        props.updateCard(item);
-      });
+    if(cards.length !== 0) {
+      let index = cards ? columnIds.indexOf(cards[0].column_id) : null;
+      if (columnIds.length === 1) {
+        let response = prompt("You sure about that? All of your tasks will be lost");
+        if(response.toLowerCase() === 'no') {
+          return;
+        }
+        console.log(response);
+      } else if (index === columnIds.length -1) {
+        cards.map((item) => {
+          item.column_id = columnIds[index - 1];
+          props.moveCard(item);
+        });
+      } else if (index < columnIds.length -1) {
+        cards.map((item) => {
+          item.column_id = columnIds[index + 1];
+          props.moveCard(item);
+        });
+      }
     }
     props.deleteColumn(id);
   }
-  // const deleteCard = (id) => {
-    
-  // }
-
-  // const updateColumn = (title, description) => {
-  //   let newColumn = {
-  //     _id: props.id, title, description
-  //   }
-  //   props.updateColumn(newColumn);
-  // }
 
   const handleSubmit = (title, description, priority) => {
     setNewCardModalIsOpen(false);
@@ -88,18 +80,12 @@ function Column(props) {
   }
 
   return (
-    <Container className={classes.container}>
-      {/* {newCardModalIsOpen ? 
-        <Modal 
-          innerText='Update Card' 
-          handleSubmit={addCard}
-          title='Column Name'
-          description='Description'
-          buttonTitle='Submit'
-        />
-      : null} */}
+    <Container 
+      // onDrop={drop}
+      // onDragOver={dragOver}
+      className={classes.container}
+      >
       <Button onClick={() => removeColumn(props.id)}>X</Button>
-      {/* <Button onClick={() => setModalIsOpen(true)}>Update</Button> */}
       <Button onClick={() => setNewCardModalIsOpen(true)}>Add Task</Button>
       <Typography variant="h4" gutterBottom component="div">{props.title}</Typography>
       <Typography  gutterBottom component="p">{props.description}</Typography>
@@ -117,12 +103,12 @@ function Column(props) {
 
       {props.tasks ? 
         props.tasks.filter((item) => item.column_id === props.id).map((filteredTask) => {
-            // console.log('filteredTask', props.id, filteredTask);
             return (
           <Card
             draggable='true'
             key={filteredTask._id}
             id={filteredTask._id}
+            column_id={filteredTask.column_id}
             title={filteredTask.title}
             description={filteredTask.description}
             priority={filteredTask.priority}
@@ -138,7 +124,7 @@ const mapDispatchToProps = dispatch => ({
   deleteColumn: (item) => dispatch(deleteColumn(item)),
   // updateColumn: (item) => dispatch(updateColumn(item)),
   addCard: (item) => dispatch(addCard(item)),
-  updateCard: (item) => dispatch(updateCard(item)),
+  moveCard: (item) => dispatch(moveCard(item)),
   // deleteCard: (item) => dispatch(deleteCard(item)),
 });
 
