@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
-import { addColumn, updateColumn, deleteColumn } from '../store/column.js';
-import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Container, Button } from '@material-ui/core';
-import Column from './column.js';
-import Modal from './modal.js';
-import '../style/board.scss';
+import { addColumn } from "../store/column.js";
+import { makeStyles } from "@material-ui/core/styles";
+import { Container, Button } from "@material-ui/core";
+import Column from "./column.js";
+import Modal from "./modal.js";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    display: 'flex',
-    flexDirection: 'row',
-    width: '90vw',
-    height: '80vh',
-    backgroundImage: 'linear-gradient( #FB5607, #FF006E)',
-    overflow: 'scroll',
+    display: "flex",
+    flexDirection: "row",
+    width: "90vw",
+    height: "80vh",
+    backgroundColor: "rgba(255,0,255,0.2)",
+    overflow: "scroll",
   },
 }));
 
@@ -25,59 +24,51 @@ function Board(props) {
 
   const handleSubmit = (title, description) => {
     setModalIsActive(false);
+    // create a new column for the users input and send to the Store
     let newColumn = {
-      _id: uuidv4(), title, description
-    }
+      _id: uuidv4(),
+      title,
+      description,
+    };
     props.addColumn(newColumn);
-  }
-
-  // const fetchData = (e) => {
-  //   e && e.preventDefault();
-  //   props.get();
-  // }
-  
-  // function Data() {
-  //   useEffect(() => {
-  //     fetchData();
-  //   }, []);
-  // }
+  };
 
   return (
     <Container className={classes.container}>
-      {modalIsActive ? 
-        <Modal 
-        innerText='New Column' 
-        handleSubmit={handleSubmit}
-        title='Column Name'
-        description='Description'
-        buttonTitle='Submit'
+      {modalIsActive ? (
+        <Modal
+          innerText="New Column"
+          handleSubmit={handleSubmit}
+          title="Column Name"
+          description="Description"
+          buttonTitle="Submit"
         />
-      : null}
-
-      {props.data ? 
-        props.data.map((item) => {
-          return (
-          <Column 
-            key={item._id}
-            id={item._id}
-            title={item.title}
-            description={item.description}
-          />
-        )})
-      :null}
-      <Button size="small"onClick={() => setModalIsActive(true)}>Add Column</Button>
+      ) : null}
+      {props.data
+        ? props.data.map((item) => {
+            return (
+              <Column
+                key={item._id}
+                id={item._id}
+                title={item.title}
+                description={item.description}
+              />
+            );
+          })
+        : null}
+      <Button size="small" onClick={() => setModalIsActive(true)}>
+        Add Column
+      </Button>
     </Container>
   );
 }
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   addColumn: (item) => dispatch(addColumn(item)),
-  // deleteColumn: (item) => dispatch(deleteColumn(item)),
-  // updateColumn: (item) => dispatch(updateColumn(item)),
 });
 
-const mapStateToProps = state => ({
-  data: state.columnReducer.items
-})
+const mapStateToProps = (state) => ({
+  data: state.columnReducer.items,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);
