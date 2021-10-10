@@ -42,6 +42,7 @@ function Board(props) {
           title="Column Name"
           description="Description"
           buttonTitle="Submit"
+          inputTitle={['columnInputName', 'columnInputDesc']}
         />
       ) : null}
       {props.data
@@ -56,7 +57,7 @@ function Board(props) {
             );
           })
         : null}
-      <Button size="small" onClick={() => setModalIsActive(true)}>
+      <Button title='addColumnBtn' size="small" onClick={() => setModalIsActive(true)}>
         Add Column
       </Button>
     </Container>

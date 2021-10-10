@@ -41,16 +41,18 @@ export default function AlertDialog(props) {
         </DialogContent>
         <DialogActions>
           <TextField
-            required
+            title={props.inputTitle[0]}
+            required='true'
             placeholder={props.title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
-            required
+            title={props.inputTitle[1]}
+            required='true'
             placeholder={props.description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          {props.options ? (
+          {/* {props.options ? (
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="demo-simple-select-standard-label">
                 Priority
@@ -69,7 +71,7 @@ export default function AlertDialog(props) {
                 <MenuItem value={props.options[2]}>{props.options[2]}</MenuItem>
               </Select>
             </FormControl>
-          ) : null}
+          ) : null} */}
           <Button onClick={handleClose} color="primary" autoFocus>
             {props.buttonTitle}
           </Button>
