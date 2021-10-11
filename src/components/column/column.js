@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { deleteColumn } from "../store/column.js";
-import { addCard, moveCard } from "../store/card.js";
-import Card from "./card.js";
+
+import { deleteColumn } from "../../store/column.js";
+import { addCard, moveCard } from "../../store/card.js";
+import Card from "../card/card.js";
+import Modal from "../modal/modal";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Container, Button, IconButton } from "@material-ui/core";
-import Modal from "./modal";
 import CloseIcon from "@mui/icons-material/Close";
-import AddBoxIcon from "@mui/icons-material/AddBox";
+import AddIcon from "@mui/icons-material/Add";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(2),
-      width: "75ch",
-    },
-  },
   container: {
     margin: 10,
     width: 250,
@@ -31,26 +27,37 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     position: "absolute",
     padding: 0,
-    top: -17,
-    right: -20,
+    top: -20,
+    right: -25,
   },
   columnHeader: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "space-around",
     padding: 0,
     margin: "auto",
     borderRadius: 5,
     padding: 5,
     marginBottom: 10,
     marginTop: 20,
-    backgroundColor: "none",
+    backgroundColor: "rgba(255,255,255,0.1)",
     position: "sticky",
+    minHeight: 170
   },
   cardContainer: {
     overflow: "scroll",
     padding: 0,
   },
+  columnTitle: {
+    textAlign: 'center',
+    minHeight: 25, 
+    fontSize: 20
+  },
+  columnDescription: {
+    textAlign: 'center',
+    minHeight: 40, 
+    fontSize: 12
+  }
 }));
 
 function Column(props) {
@@ -111,16 +118,16 @@ function Column(props) {
         >
           <CloseIcon />
         </IconButton>
-        <Typography variant="h5" gutterBottom component="p">
-          {props.title}
+        <Typography className={classes.columnTitle} component="p">
+          {props.title ? props.title : 'no title'}
         </Typography>
-        <Typography gutterBottom component="p">
-          {props.description}
+        <Typography className={classes.columnDescription} component="p">
+          {props.description ? props.description : 'no description'}
         </Typography>
         <Button
           size="medium"
-          variant="outlined"
-          startIcon={<AddBoxIcon />}
+          variant="standard"
+          startIcon={<AddIcon />}
           onClick={() => setNewCardModalIsOpen(true)}
         >
           Add Task
@@ -129,11 +136,11 @@ function Column(props) {
 
       {newCardModalIsOpen ? (
         <Modal
-          innerText="New Task"
+          innerText="Create A New Task"
           handleSubmit={handleSubmit}
           title="Task Name"
           description="Description"
-          priority={["High", "Low", "Medium", "High"]}
+          options={["Low", "Medium", "High"]}
           buttonTitle="Submit"
         />
       ) : null}

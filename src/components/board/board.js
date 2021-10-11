@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
-import { addColumn } from "../store/column.js";
+import { v4 as uuidv4 } from "uuid";
+
+import { addColumn } from "../../store/column.js";
+import Column from "../column/column.js";
+import Modal from "../modal/modal.js";
+
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Button } from "@material-ui/core";
-import Column from "./column.js";
-import Modal from "./modal.js";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -42,8 +44,7 @@ function Board(props) {
           title="Column Name"
           description="Description"
           buttonTitle="Submit"
-          inputTitle={['columnInputName', 'columnInputDesc']}
-        />
+          />
       ) : null}
       {props.data
         ? props.data.map((item) => {
