@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { addColumn } from "../../store/column.js";
-import Column from "../column/column.js";
-import Modal from "../modal/modal.js";
+import { addColumn } from "../store/column.js";
+import Column from "./column.js";
+import Modal from "./modal.js";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Container, Button } from "@material-ui/core";
