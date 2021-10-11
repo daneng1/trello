@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import { deleteColumn } from "../../store/column.js";
-import { addCard, moveCard } from "../../store/card.js";
-import Card from "../card/card.js";
-import Modal from "../modal/modal";
+import { deleteColumn } from "../store/column.js";
+import { addCard, moveCard } from "../store/card.js";
+import Card from "./card.js";
+import Modal from "./modal";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Container, Button, IconButton } from "@material-ui/core";

@@ -13,7 +13,13 @@
   - Currently the app is not attached to a database, so on refresh all cards are reset to the initial state.
   - Currently there is no login so cards can not be saved to a users board.
 
-### Starting App
+### Links
+
+[Deployed Site](https://main.d2uifutv0igqjs.amplifyapp.com)
+
+[GitHub Repo](https://github.com/daneng1/trello)
+
+### Starting App Locally
 
 1. Download the package from GitHub to your local machine.
     1. If you have SSH enabled, use `git clone git@github.com:daneng1/trello.git`
@@ -21,3 +27,4 @@
 1. In terminal, navigate to the project folder.
 1. Type `npm install` to install all dependencies.
 1. Type `npm run start` to run it on your browser.
+

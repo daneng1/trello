@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { deleteCard, moveCard } from "../../store/card.js";
+import { deleteCard, moveCard } from "../store/card.js";
 
 import { makeStyles } from "@material-ui/core/styles";
 import {
