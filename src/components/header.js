@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Container, Button } from "@material-ui/core";
-import { fontWeight } from "@mui/system";
+import { Typography, Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 
   container: {
     width: "90vw",
-    height: "10vh",
+    height: 100,
     backgroundColor: "none",
     margin: "0 auto",
   },
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "2vh",
     fontWeight: "bolder",
     textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
-    fontSize: "4vw",
+    fontSize: 50,
     color: "#002766",
   },
 }));
@@ -28,7 +28,7 @@ export default function Board() {
   return (
     <Container className={classes.container}>
       <Typography variant="h4" className={classes.headerText}>
-        Dan's Trello Clone
+        Project Board
       </Typography>
     </Container>
   );

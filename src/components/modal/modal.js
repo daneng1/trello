@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   TextField,
   Button,
@@ -41,37 +42,37 @@ export default function AlertDialog(props) {
         </DialogContent>
         <DialogActions>
           <TextField
-            title={props.inputTitle[0]}
+            data-testId='inputName'
             required='true'
             placeholder={props.title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
-            title={props.inputTitle[1]}
+            data-testId='inputDesc'
             required='true'
             placeholder={props.description}
             onChange={(e) => setDescription(e.target.value)}
           />
-          {/* {props.options ? (
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          {props.options ? (
+            <>
               <InputLabel id="demo-simple-select-standard-label">
                 Priority
               </InputLabel>
+            <FormControl size="medium" variant="standard" sx={{ m: 1, minWidth: 300 }}>
               <Select
                 required
                 labelId="demo-simple-select-standard-label"
                 id="demo-simple-select-standard"
-                value=""
                 onChange={(e) => setPriority(e.target.value)}
                 label="Priority"
               >
-                <MenuItem value="none">none</MenuItem>
                 <MenuItem value={props.options[0]}>{props.options[0]}</MenuItem>
                 <MenuItem value={props.options[1]}>{props.options[1]}</MenuItem>
                 <MenuItem value={props.options[2]}>{props.options[2]}</MenuItem>
               </Select>
             </FormControl>
-          ) : null} */}
+            </>
+          ) : null}
           <Button onClick={handleClose} color="primary" autoFocus>
             {props.buttonTitle}
           </Button>

@@ -4,14 +4,16 @@ let initialState = {
       title: "Column 1 CARD 1",
       description: "This is the description for this card.",
       column_id: "snm,dbflkwufha;hLKGkjhFGV",
-      _id: "nabdslakgailDGUwaukev"
+      _id: "nabdslakgailDGUwaukev",
+      priority: "High",
     },
     {
       title: "Column 2 CARD 1",
       description: "This is the description for this card.",
       column_id: "FDSDGJHSFKLGb&T^*^&*",
-      _id: "samnhedvkuDFKVCWA"
-    }
+      _id: "samnhedvkuDFKVCWA",
+      priority: "Low",
+    },
   ],
 };
 
@@ -29,7 +31,9 @@ export default function cardReducer(state = initialState, action) {
       return { ...state, items: newItems };
 
     case "MOVE_CARD":
-      let updatedItems = state.items.map(item => item._id === payload[0] ? {...item, column_id:payload[1] } : item );
+      let updatedItems = state.items.map((item) =>
+        item._id === payload[0] ? { ...item, column_id: payload[1] } : item
+      );
       return { ...state, items: updatedItems };
 
     default:
@@ -54,6 +58,6 @@ export const deleteCard = (id) => {
 export const moveCard = (item) => {
   return {
     type: "MOVE_CARD",
-    payload: item
+    payload: item,
   };
-};  
+};
