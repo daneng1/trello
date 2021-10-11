@@ -13,7 +13,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 
-export default function AlertDialog(props) {
+export default function Modal(props) {
   const [open, setOpen] = useState(true);
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
@@ -42,13 +42,15 @@ export default function AlertDialog(props) {
         </DialogContent>
         <DialogActions>
           <TextField
-            data-testId='inputName'
+            type="text"
+            title='inputName'
             required='true'
             placeholder={props.title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
-            data-testId='inputDesc'
+            type="text"
+            title='inputDesc'
             required='true'
             placeholder={props.description}
             onChange={(e) => setDescription(e.target.value)}
