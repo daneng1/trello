@@ -43,15 +43,15 @@ export default function Modal(props) {
         <DialogActions>
           <TextField
             type="text"
-            title='inputName'
-            required='true'
+            title="inputName"
+            required="true"
             placeholder={props.title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
             type="text"
-            title='inputDesc'
-            required='true'
+            title="inputDesc"
+            required="true"
             placeholder={props.description}
             onChange={(e) => setDescription(e.target.value)}
           />
@@ -60,19 +60,29 @@ export default function Modal(props) {
               <InputLabel id="demo-simple-select-standard-label">
                 Priority
               </InputLabel>
-            <FormControl size="medium" variant="standard" sx={{ m: 1, minWidth: 300 }}>
-              <Select
-                required
-                labelId="demo-simple-select-standard-label"
-                id="demo-simple-select-standard"
-                onChange={(e) => setPriority(e.target.value)}
-                label="Priority"
+              <FormControl
+                size="medium"
+                variant="standard"
+                sx={{ m: 1, minWidth: 300 }}
               >
-                <MenuItem value={props.options[0]}>{props.options[0]}</MenuItem>
-                <MenuItem value={props.options[1]}>{props.options[1]}</MenuItem>
-                <MenuItem value={props.options[2]}>{props.options[2]}</MenuItem>
-              </Select>
-            </FormControl>
+                <Select
+                  required
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  onChange={(e) => setPriority(e.target.value)}
+                  label="Priority"
+                >
+                  <MenuItem value={props.options[0]}>
+                    {props.options[0]}
+                  </MenuItem>
+                  <MenuItem value={props.options[1]}>
+                    {props.options[1]}
+                  </MenuItem>
+                  <MenuItem value={props.options[2]}>
+                    {props.options[2]}
+                  </MenuItem>
+                </Select>
+              </FormControl>
             </>
           ) : null}
           <Button onClick={handleClose} color="primary" autoFocus>
