@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+
 import { deleteCard, moveCard } from "../store/card.js";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -38,14 +39,14 @@ function BasicCard(props) {
       overflow: "scroll",
     },
     High: {
-      color: 'red'
+      color: "red",
     },
     Medium: {
-      color: 'orange'
+      color: "orange",
     },
     Low: {
-      color: 'green'
-    }
+      color: "green",
+    },
   }));
 
   const [moveButtons, setMoveButtons] = useState();
@@ -78,7 +79,7 @@ function BasicCard(props) {
   });
 
   return (
-    <Card draggable='true'className={classes.cardContainer} id={props.id}>
+    <Card draggable="true" className={classes.cardContainer} id={props.id}>
       <IconButton
         onClick={() => {
           removeCard(props.id);
@@ -89,13 +90,13 @@ function BasicCard(props) {
       </IconButton>
       <CardContent>
         <Typography className={classes[props.priority]} gutterBottom>
-          Priority: {props.priority ? props.priority : 'none selected'}
+          Priority: {props.priority ? props.priority : "none selected"}
         </Typography>
         <Typography sx={{ fontSize: 14 }} gutterBottom>
-          {props.title ? props.title : 'no title'}
+          {props.title ? props.title : "no title"}
         </Typography>
         <Typography className={classes.description} component="section">
-          {props.description ? props.description : 'no description'}
+          {props.description ? props.description : "no description"}
         </Typography>
       </CardContent>
       <CardActions>

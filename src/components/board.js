@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     width: "90vw",
     height: "80vh",
-    backgroundColor: "rgba(255,0,255,0.2)",
+    backgroundColor: "rgba(235,20,235,0.2)",
     overflow: "scroll",
   },
 }));
@@ -44,7 +44,7 @@ function Board(props) {
           title="Column Name"
           description="Description"
           buttonTitle="Submit"
-          />
+        />
       ) : null}
       {props.data
         ? props.data.map((item) => {
@@ -58,7 +58,11 @@ function Board(props) {
             );
           })
         : null}
-      <Button title='addColumnBtn' size="small" onClick={() => setModalIsActive(true)}>
+      <Button
+        title="addColumnBtn"
+        size="small"
+        onClick={() => setModalIsActive(true)}
+      >
         Add Column
       </Button>
     </Container>
